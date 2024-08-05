@@ -1,0 +1,33 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+  background-color: black;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.header{
+  display: flex;
+  flex-direction: row;
+  height: 5rem;
+  background-color: rgb(20, 22, 96);
+  color: antiquewhite;
+  align-items: center;
+  justify-content: center;
+}
+
+.body{
+  display: flex;
+  color: antiquewhite;
+  flex-direction: row;
+}
+
+.scoreboard{
+  margin: 1rem;
+  padding: 1rem;
+};
+
+.image{};

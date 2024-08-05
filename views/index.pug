@@ -1,9 +1,12 @@
 extends layout
 
 block content
+  script(defer src="../public/javascript/pictureClick.js")
   div(class="header")
     h1= "Where is Waldo?"
   div(class="body")
     div(class="scoreboard")
       h2= "score"
     div(class="image")
+      p= "Finde den richtigen Charakter!"
+      img(src="images/sp.jpg" height="400px" onclick="pictureClick")

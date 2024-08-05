@@ -23,11 +23,16 @@ a {
   display: flex;
   color: antiquewhite;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .scoreboard{
   margin: 1rem;
   padding: 1rem;
-};
+}
 
-.image{};
+.image{
+  margin: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+};

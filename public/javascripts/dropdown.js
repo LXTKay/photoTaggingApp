@@ -1,3 +1,5 @@
+import {submitAnswer} from "./communication.js";
+
 function createDropdown(nameList){
   const dropdown = document.createElement("select");
   nameList.forEach(name => {
@@ -9,6 +11,12 @@ function createDropdown(nameList){
   dropdown.style.display = "inline block";
   dropdown.id = "dropdown";
   dropdown.classList.add("dropdown");
+
+  dropdown.addEventListener("change", async (e) => {
+    e.stopPropagation();
+    const selectedName = e.target.value;
+    const data = await submitAnswer(selectedName);
+  })
   return dropdown;
 };
 

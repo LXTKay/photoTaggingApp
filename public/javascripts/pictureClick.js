@@ -3,13 +3,15 @@ import {createDropdown, checkWhetherDropdownExist} from "./dropdown.js";
 import {createSelectionBox} from "./selectionBox.js";
 
 const nameList = ["Randy Marsh", "Butters", "PC Principle", "Timmy", "Cartman"]
+window.lastClickedPosition = [0,0];
 
 function pictureClick(e) {
   e.stopPropagation();
   const isDropdownExisting = checkWhetherDropdownExist();
   if(isDropdownExisting) return;
 
-  const [x, y] = getCoordinates(e);
+  const position = getCoordinates(e);
+  window.lastClickedPosition = position;
 
   const selectionBox = createSelectionBox();
   selectionBox.style.left = `${+e.clientX -50}px`;

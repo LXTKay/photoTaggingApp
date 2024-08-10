@@ -1,5 +1,29 @@
 import {apiURL} from "./config.js";
 import {getAuthCookie, putAuthCookie} from "./authCookie.js";
+import mockNameList from "./mockNameList.js";
+
+async function submitName(name){
+  try{
+    const authCookie = getAuthCookie();
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({name: name}),
+    };
+    if(authCookie) options.headers["Authorization"] = authCookie;
+
+    const response = await fetch(apiURL + "names", options);
+    const data = await response.json();
+    /* Expected response: {success: boolean, message: string} */
+    return data;
+  }catch(error){
+    console.log("Server request failed!");
+    console.log(error);
+    return {message: error.message};
+  }
+};
 
 async function submitAnswer(selectedName, position){
   try{
@@ -20,9 +44,7 @@ async function submitAnswer(selectedName, position){
     /* Expected response: {
       finished: boolean
       correctSubmission: boolean
-      token: optional
     } */
-    if(data.token) putAuthCookie(data.token);
     return data;
   }catch(error){
     const data = {
@@ -35,4 +57,18 @@ async function submitAnswer(selectedName, position){
   }
 };
 
-export {submitAnswer};
+async function receiveNameList(){
+  try{
+    const response = await fetch(apiURL + "names");
+    const data = await response.json();
+    putAuthCookie(data.token);
+    const nameList = data.nameList;
+    return nameList;
+  }catch(error){
+    console.log("Server request failed!");
+    console.log(error);
+    return mockNameList;
+  }
+}
+
+export {submitAnswer, receiveNameList, submitName};

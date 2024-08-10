@@ -2,10 +2,8 @@ import getCoordinates from "./getCoordinates.js";
 import {createDropdown, checkWhetherDropdownExist} from "./dropdown.js";
 import {createSelectionBox} from "./selectionBox.js";
 
-const nameList = ["Randy Marsh", "Butters", "PC Principle", "Timmy", "Cartman"]
-window.lastClickedPosition = [0,0];
-
-function pictureClick(e) {
+export default function pictureClick(e, nameList) {
+  if(checkWhetherDropdownExist()) return;
   e.stopPropagation();
   const isDropdownExisting = checkWhetherDropdownExist();
   if(isDropdownExisting) return;
@@ -13,24 +11,23 @@ function pictureClick(e) {
   const position = getCoordinates(e);
   window.lastClickedPosition = position;
 
+  const image = document.querySelector("#waldo");
+
   const selectionBox = createSelectionBox();
   selectionBox.style.left = `${+e.clientX -50}px`;
   selectionBox.style.top = `${+e.clientY -50}px`;
-  document.body.append(selectionBox);
+  image.append(selectionBox);
 
   const dropdown = createDropdown(nameList);
   dropdown.style.left = `${+e.clientX - 50}px`;
   dropdown.style.top = `${e.clientY + 70}px`;
-  document.body.append(dropdown);
+  image.append(dropdown);
 
-  document.body.addEventListener("click", (e) => {
+  document.body.addEventListener("click", function unselect(e) {
+    document.body.removeEventListener("click", unselect);
     if(e.target === dropdown) return;
     dropdown.remove();
-    selectionBox.remove();
+    const boxToBeRemoved = document.querySelector("#selectionBox");
+    if(boxToBeRemoved) boxToBeRemoved.remove();
   });
 };
-
-document.querySelector("#waldo").addEventListener("click", (e)=>{
-  if(checkWhetherDropdownExist()) return;
-  pictureClick(e);
-});

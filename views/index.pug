@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  script(defer src="javascripts/pictureClick.js" type="module")
+  script(defer src="javascripts/init.js" type="module")
   div(class="header")
     h1= "Where is Waldo?"
   div(class="body")
@@ -9,4 +9,5 @@ block content
       h2= "score"
     div(class="image")
       p= "Finde den richtigen Charakter!"
-      img(src="images/sp.jpg" height="400px" id="waldo")
+      div(id="waldo")
+        img(src="images/sp.jpg" height="400px")

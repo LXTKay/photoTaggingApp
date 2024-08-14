@@ -1,8 +1,8 @@
-import {submitAnswer} from "./communication.js";
+import { submitAnswer } from "./communication.js";
 import { updateBoxToSuccess } from "./selectionBox.js";
 import { successModal } from "./successModal.js";
 
-function createDropdown(nameList){
+function createDropdown(nameList) {
   const dropdown = document.createElement("select");
   const defaultOption = document.createElement("option");
   defaultOption.textContent = "--Select--";
@@ -25,30 +25,24 @@ function createDropdown(nameList){
     const position = window.lastClickedPosition;
     let data = await submitAnswer(selectedName, position);
 
-    //Test
-    data = {
-      finished: false,
-      correctSubmission: true
-    };
-
-    if(data.finished){
+    if (data.finished) {
       const modal = successModal();
       document.body.append(modal);
     }
-    if(data.correctSubmission) updateBoxToSuccess();
-    
+    if (data.correctSubmission) updateBoxToSuccess();
+
     const boxToBeRemoved = document.querySelector("#selectionBox");
-    if(boxToBeRemoved) boxToBeRemoved.remove();
+    if (boxToBeRemoved) boxToBeRemoved.remove();
     dropdown.remove();
   });
 
   return dropdown;
 };
 
-function checkWhetherDropdownExist(){
+function checkWhetherDropdownExist() {
   const dropdown = document.querySelector("#dropdown");
-  if(dropdown) return true;
+  if (dropdown) return true;
   return false;
 };
 
-export {createDropdown, checkWhetherDropdownExist};
+export { createDropdown, checkWhetherDropdownExist };

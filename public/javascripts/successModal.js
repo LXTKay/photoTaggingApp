@@ -1,17 +1,17 @@
 import { submitName } from "./communication.js";
 
-async function buttonEvent(name, errorMessageBox){
+async function buttonEvent(name, errorMessageBox) {
   const data = await submitName(name);
-  if(data.success) {window.location.href = "/"}
-  else {errorMessageBox.textContent = data.message};
+  if (data.success) { window.location.href = "/" }
+  else { errorMessageBox.textContent = data.message };
   return;
 };
 
-function successModal(){
+function successModal() {
   const modal = document.createElement("div");
   modal.className = "successModal";
   modal.id = "successModal";
-  
+
   const headline = document.createElement("h1");
   headline.textContent = "Success!";
   modal.appendChild(headline);
@@ -28,6 +28,9 @@ function successModal(){
   usernameInput.type = "text";
   usernameInput.name = "username";
   usernameInput.id = "username";
+  usernameInput.required = true;
+  usernameInput.maxLength = 10;
+  usernameInput.minLength = 3;
   form.appendChild(usernameInput);
 
   const errorMessageBox = document.createElement("div");
@@ -36,7 +39,7 @@ function successModal(){
   const submitButton = document.createElement("button");
   submitButton.type = "submit";
   submitButton.textContent = "Submit";
-  submitButton.addEventListener("click", (e)=>{
+  submitButton.addEventListener("click", (e) => {
     e.preventDefault();
     buttonEvent(usernameInput.value, errorMessageBox);
   });
@@ -49,4 +52,4 @@ function successModal(){
   return modal;
 };
 
-export {successModal};
+export { successModal };

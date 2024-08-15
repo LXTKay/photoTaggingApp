@@ -24,12 +24,14 @@ exports.post = asyncHandler(async (req, res) => {
     finished: false
   };
 
+  let progress = req.userData.progress;
   if (Math.abs(x - target.x) <= 50
     && Math.abs(y - target.y) <= 50) {
     answer.correctSubmission = true;
+    progress = progress - 1;
   }
 
-  const progress = req.userData.progress - 1;
+
   if (progress <= 0) answer.finished = true;
 
   const payload = {

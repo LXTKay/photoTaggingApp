@@ -28,8 +28,15 @@ function createDropdown(nameList) {
     if (data.finished) {
       const modal = successModal();
       document.body.append(modal);
-    }
-    if (data.correctSubmission) updateBoxToSuccess();
+    };
+    if (data.correctSubmission) {
+      updateBoxToSuccess();
+
+      const index = nameList.indexOf(selectedName);
+      if (index > -1) {
+        nameList.splice(index, 1);
+      };
+    };
 
     const boxToBeRemoved = document.querySelector("#selectionBox");
     if (boxToBeRemoved) boxToBeRemoved.remove();

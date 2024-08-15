@@ -17,8 +17,7 @@ exports.post = [
       res.json({ errors: errors.array(), message: "Validation failed!", success: false });
       return;
     };
-    const finishTime = Date.now();
-    const totalTime = +(((+finishTime - +req.userData.startTime) / 1000).toFixed(3));
+    const totalTime = +(((+req.userData.endTime - +req.userData.startTime) / 1000).toFixed(3));
     const name = await prisma.user.create({
       data: {
         name: req.body.name,

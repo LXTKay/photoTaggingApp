@@ -32,12 +32,18 @@ exports.post = asyncHandler(async (req, res) => {
   const progress = req.userData.progress - 1;
   if (progress <= 0) answer.finished = true;
 
+  const payload = {
+    progress,
+    startTime: req.userData.startTime,
+    randomID: req.userData.randomID
+  };
+
+  if (answer.finished) {
+    payload.endTime = Date.now();
+  }
+
   const token = jwt.sign(
-    {
-      progress,
-      startTime: req.userData.startTime,
-      randomID: req.userData.randomID
-    },
+    payload,
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: "1h" }
   );

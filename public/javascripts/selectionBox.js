@@ -1,4 +1,4 @@
-function createSelectionBox(){
+function createSelectionBox() {
   const box = document.createElement("div");
   box.className = "selectionBox";
   box.style.position = 'absolute';
@@ -7,11 +7,10 @@ function createSelectionBox(){
   return box;
 };
 
-function updateBoxToSuccess(){
+function updateBoxToSuccess() {
   const successBox = document.querySelector("#selectionBox");
-  console.log("We are now in updateBoxToSuccess: ", successBox);
   successBox.className = "successBox";
   successBox.removeAttribute("id");
 };
 
-export {createSelectionBox, updateBoxToSuccess};
+export { createSelectionBox, updateBoxToSuccess };

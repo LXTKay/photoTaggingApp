@@ -3,11 +3,18 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const RateLimit = require("express-rate-limit");
 
 const indexRouter = require('./routes/index');
 const apiRouter = require('./routes/apiRouter');
 
 const app = express();
+
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 100,
+});
+app.use(limiter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

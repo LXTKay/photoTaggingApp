@@ -2,6 +2,30 @@ import { apiURL } from "./config.js";
 import { getAuthCookie, putAuthCookie } from "./authCookie.js";
 import mockNameList from "./mockNameList.js";
 
+async function receiveHighScore() {
+  try {
+    const response = await fetch(apiURL + "highScore");
+    const data = await response.json();
+    if (!data.highScore) throw new Error('No high score received!');
+    /*Expected: {highScore: [{name: string, time: number}]}*/
+    return data.highScore;
+  } catch (error) {
+    console.log("Server request failed!");
+    console.log(error);
+
+    //Test
+    const mockHighScore = [
+      { name: "peter", time: 44.123 },
+      { name: "hans", time: 123.123 },
+      { name: "klaus", time: 23.123 },
+      { name: "lisa", time: 123.123 },
+      { name: "anna", time: 122.123 },
+    ];
+
+    return mockHighScore;
+  }
+};
+
 async function submitName(name) {
   try {
     const authCookie = getAuthCookie();
@@ -74,4 +98,4 @@ async function receiveNameList() {
   }
 };
 
-export { submitAnswer, receiveNameList, submitName };
+export { submitAnswer, receiveNameList, submitName, receiveHighScore };

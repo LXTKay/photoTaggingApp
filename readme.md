@@ -21,3 +21,6 @@ The game logic is entirely in the backend. It serves a normal HTML on request an
 - Prisma
 - PostgreSQL
 
+### Deployed Project
+
+https://delightful-nervous-butternut.glitch.me/
